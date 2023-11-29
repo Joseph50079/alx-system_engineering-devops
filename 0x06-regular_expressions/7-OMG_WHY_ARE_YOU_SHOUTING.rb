@@ -1,8 +1,2 @@
-#!/usr/bin/env bash
-# displays special string indefinitely until SIGTERM
-trap 'echo "I am invincible!!!"' SIGTERM
-while true;
-do
-      echo "To infinity and beyond"
-      sleep 2
-done
+#!/usr/bin/env ruby
+puts ARGV[0].scan(/[A-Z]/).join

@@ -1,3 +1,2 @@
-#!/usr/bin/env bash
-# kill a running process
-pkill -f 4-to_infinity_and_beyond
+#!/usr/bin/env ruby
+puts ARGV[0].scan(/^\d{10}$/).join
