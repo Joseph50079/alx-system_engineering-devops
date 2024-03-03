@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This list files in a directory
+
+List=$(ls)
+
+for i in $List
+do
+	echo "$i"
+done
