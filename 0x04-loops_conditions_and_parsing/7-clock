@@ -1,0 +1,16 @@
+#!/bin/env bash
+# this is a clock
+
+
+i=0
+while [ $i -ne 12 ]
+do
+	echo "Hour: $i"
+	n=1
+	while [ $n -ne 60 ]
+	do
+		echo $n
+		(( n++ ))
+	done
+	(( i++ ))
+done
