@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This is a file checker
+
+if test -e "school"
+then
+	echo "school file exists"
+	if test -s "school"
+	then
+		echo "school file is not empty"
+	else
+		echo "school file is empty"
+	fi
+
+	if test -f "school"
+	then
+		echo "school is a regular file"
+	fi 
+else
+	echo "school file does not exist"
+fi
