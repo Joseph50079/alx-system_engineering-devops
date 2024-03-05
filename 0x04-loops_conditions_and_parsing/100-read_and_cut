@@ -3,8 +3,8 @@
 
 while read -r line
 do
-	user_n=$( echo $line | cut -d: -f1 )
-	id=$( echo $line | cut -d: -f3 )
-	path=$( echo $line | cut -d: -f6 )
+	user_n=$( echo "$line" | cut -d: -f1 )
+	id=$( echo "$line" | cut -d: -f3 )
+	path=$( echo "$line" | cut -d: -f6 )
 	echo "$user_n:$id:$path"
 done < /etc/passwd
