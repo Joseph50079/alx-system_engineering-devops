@@ -1,13 +1,19 @@
-# configuring ssh with puppe
+# 100-puppet_ssh_config.pp
 
+# Ensure the presence of the 'file_line' resource type from the puppetlabs-stdlib module
+# If you haven't already, you need to install the stdlib module by running:
+# sudo puppet module install puppetlabs-stdlib
 
-  # Use augeas to edit the ssh_config file
-  augeas { 'ssh_config':
-    context => '/files/etc/ssh/ssh_config',
-    changes => [
-      'set Host/*/IdentityFile $private_key_path',
-      'set Host/*/PasswordAuthentication no',
-    ],
-    onlyif  => 'match Host/*/IdentityFile[.="~/.ssh/school"] size == 0',
-  }
+# Turn off password authentication
+file_line { 'Turn off passwd auth':
+  path  => '/etc/ssh/sshd_config',
+  line  => 'PasswordAuthentication no',
+  match => '^#?PasswordAuthentication.*',
+}
 
+# Declare identity file
+file_line { 'Declare identity file':
+  path  => '/etc/ssh/ssh_config',
+  line  => 'IdentityFile ~/.ssh/id_rsa',
+  match => '^#?IdentityFile.*',
+}
