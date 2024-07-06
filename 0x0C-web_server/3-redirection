@@ -11,7 +11,7 @@ printf %s "server {
     root   /etc/nginx/html;
     index  index.html index.htm;
     location /redirect_me {
-        return 301 https://vx-underground.org/;
+        return 301 Moved Permanently;
     }
 }" > /etc/nginx/sites-available/default
 
