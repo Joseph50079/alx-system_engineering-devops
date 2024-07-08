@@ -3,4 +3,4 @@
 apt-get update
 apt-get -y install nginx
 service nginx start
-echo "Hello World" > /www/html/index.html
+echo "Hello World" > /etc/nginx/html/index.html
