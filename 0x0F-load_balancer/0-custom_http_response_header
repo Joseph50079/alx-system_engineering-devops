@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# custom HTTP Header responses
+apt-get update
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
+HOSTNAME=$(hostname)
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    server_name igree.tech;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
+
+    location / {
+        add_header X-Served-By "$HOSTNAME";
+    }
+}" > /etc/nginx/sites-available/default
+service nginx restart
