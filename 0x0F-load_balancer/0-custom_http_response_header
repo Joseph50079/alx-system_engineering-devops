@@ -2,12 +2,13 @@
 # custom HTTP Header responses
 apt-get update
 apt-get install -y nginx
-echo "Hello World!" > /var/www/html/index.html
+sudo mkdir -p /var/www/html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 HOSTNAME=$(hostname)
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    root   /etc/nginx/html;
+    root   /var/www/html;
     index  index.html index.htm;
 
     location / {
