@@ -13,22 +13,16 @@ exec { 'write file':
 file { '/var/www/html/index.html' :
   content => 'Hello World!',
 }
-###file_line { 'add header' :
-  ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  line   => "\tadd_header X-Served-By ${hostname};",
-  after  => 'server_name _;',
-}###
 
 file {'/etc/nginx/sites-available/default':
-	content => "server {
+  content => 'server {
     listen 80;
     listen [::]:80 default_server;
     root   /var/www/html;
     index  index.html index.htm;
 
     location / {
-        add_header X-Served-By "$HOSTNAME";
+        add_header X-Served-By "$(hostname)";
     }
 }',
 }
