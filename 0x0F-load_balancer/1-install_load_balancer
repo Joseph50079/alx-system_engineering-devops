@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Installing and configuring HAProxy in Ubuntu
-apt-get update
-apt-get install haproxy -y
+apt-get install --no-install-recommends -y software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.8
+apt-get install haproxy=2.8.\* -y
 printf %s "global
     log /dev/log local0
     log /dev/log local1 notice
@@ -34,7 +35,8 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    server web-01 52.201.156.75:80 check
-    server web-02 54.172.255.78:80 check
+    http-request set-header X-Server-Name %[srv_name]
+    server 142369-web-01 52.201.156.75:80 check
+    server 142369-web-02 54.172.255.78:80 check
     " > /etc/haproxy/haproxy.cfg
 service haproxy restart
