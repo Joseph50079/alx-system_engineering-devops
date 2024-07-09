@@ -14,6 +14,7 @@ printf %s "global
     maxconn 2000
     user haproxy
     group haproxy
+
 defaults
     log global
     mode http
@@ -24,12 +25,14 @@ defaults
     timeout connect  5000
     timeout client  10000
     timeout server  10000
+
 listen hbnb
     bind 0.0.0.0:80
     mode http
     stats enable
     stats uri /haproxy?stats
     balance roundrobin
+    option http-keep-alive
     option forwardfor
     server 142369-web-01 52.201.156.75:80 check
     server 142369-web-02 54.172.255.78:80 check
