@@ -1,3 +1,4 @@
+#setup web server
 package { 'nginx':
   ensure   => 'installed',
   provider => 'apt',
@@ -19,7 +20,6 @@ file_line { 'add header' :
   after  => 'server_name _;',
 }
 
-service { 'start':
+service { 'nginx':
   ensure => running,
-  name   => 'nginx',
 }
