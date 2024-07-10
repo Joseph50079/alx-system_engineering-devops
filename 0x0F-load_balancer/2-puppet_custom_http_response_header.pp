@@ -15,7 +15,8 @@
   #  Create  the  HTML  file  with  the  "Hello  World!"  content
   file  { '/var/www/html/index.html':
     ensure  =>  file,
-    content =>  'Hello  World!',
+    content =>  'Hello  World!
+',
     owner   =>  'www-data',
     group   =>  'www-data',
     mode    =>  '0644',
