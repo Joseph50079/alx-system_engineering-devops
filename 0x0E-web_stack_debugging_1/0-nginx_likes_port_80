@@ -2,5 +2,6 @@
 # make nginx point to port 80
 sudo apt-get update
 sudo apt-get install -y nginx
-sudo ln -sf /etc/nginx/sites-available/default /etc/nignx/sites-enabled/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
+
