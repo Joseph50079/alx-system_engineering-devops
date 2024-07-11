@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Installing and configuring HAProxy in Ubuntu
 apt-get install -y software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-2.8
+add-apt-repository -y ppa:vbernat/haproxy-1.8
 apt-get update
-apt-get install -y haproxy=2.8.\*
+apt-get install -y haproxy=1.8.\*
 
 echo "ENABLED=1" >> /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg{,.original}
