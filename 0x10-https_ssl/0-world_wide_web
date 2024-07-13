@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
-# Script that will display information about subdomains
+#Displays information about subdomains
 
-DNS_info () {
-    ANSWER=$(dig $2 | grep -A1 'ANSWER SECTION:' | awk 'NR==2 {print $0}')
-    echo "The subdomain $1 is a $(echo $ANSWER | awk '{print $4}') record and points to $(echo $ANSWER | awk '{print $5}')"
+function subdomain() {
+	ANS=$(dig $1 | grep -A1 'ANSWER SECTION:' | awk 'NR==2')
+	DOMAIN=$(echo $ANS | cut -d ' '  -f 1 | cut -d '.' -f 1)
+	TYPE=$(echo $ANS | cut -d ' ' -f 4)
+	IP=$(echo $ANS | cut -d ' ' -f 5 )
+	echo "The subdomain $DOMAIN is a $TYPE record and points to $IP"
 }
 
-if [[ $# == 1 ]]; then
-    subdomains=('www' 'lb-01' 'web-01' 'web-02')
-    for i in "${subdomains[@]}"; do
-	CONCAT="$i.$1"
-	DNS_info $i $CONCAT
-    done
+my_sub=('www' 'lb-01' 'web-01' 'web-02')
+if [ $# -eq 1 ]; then
+	sub=$(echo $1 | cut -d "." -f 1)
+	for element in "${my_sub[@]}"; do
+		if [[ "$element" == "$sub" ]]; then
+			subdomain $1
+			exit 0
+		fi
+	done
+
+	for element in "${my_sub[@]}"; do
+		subdomain "$element.$1"
+	done
 else
-    CONCAT="$2.$1"
-    DNS_info $2 $CONCAT
+	subdomain "$2.$1"
+	exit 0
 fi
