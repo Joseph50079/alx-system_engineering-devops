@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+# forwarding firewall port configuration
+sudo echo "*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+" >> /etc/ufw/before.rules
+sudo echo "DEFAULT_FORWARD_POLICY="ACCEPT"
+" >> /etc/default/ufw
+sudo echo "net.ipv4.ip_forward=1
+" >> /etc/sysctl.conf
+sudo sysctl -p
+sudo ufw disable
+sudo ufw enable
+sudo iptables -t nat -L
