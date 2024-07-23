@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#replace nginx with new user nginx
+sudo useradd -r -s /sbin/nologin nginx
+sudo sed -i '/^user/c\user nginx nginx;' /etc/nginx/nginx.conf
+sudo chown -R nginx:nginx /var/log/nginx
+sudo chown -R nginx:nginx /var/cache/nginx
+sudo service nginx restart
