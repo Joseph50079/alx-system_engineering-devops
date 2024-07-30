@@ -31,17 +31,14 @@ if __name__ == "__main__":
         print()
     dicit = {}
     lis = []
-    try:
-        for todo in todos:
-            dicit['task'] = todo['title']
-            dicit['completed'] = todo['completed']
-            dicit['username'] = users[0]['username']
-            lis.append(dicit)
-        json_data = {}
-        json_data[f"{user_id}"] = lis
+    for todo in todos:
+        dicit['task'] = todo['title']
+        dicit['completed'] = todo['completed']
+        dicit['username'] = users[0]['username']
+        lis.append(dicit)
+    json_data = {}
+    json_data[f"{user_id}"] = lis
 
-        json_file = f"{user_id}.json"
-        with open(json_file, mode='w') as file:
-            json.dump(json_data, file)
-    except IOError:
-        print()
+    json_file = f"{user_id}.json"
+    with open(json_file, mode='w') as file:
+        json.dump(json_data, file)
