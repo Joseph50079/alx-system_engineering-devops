@@ -27,16 +27,14 @@ if __name__ == "__main__":
         print()
     except ValueError:
         print()
+    csv_data = ""
+    for todo in todos:
+        csv_data += f'"{todo["userId"]}","{users[0]["username"]}",'
+        csv_data += f'"{todo["completed"]}","{todo["title"]}"\n'
 
     try:
-        header = ["userId", "username", "completed", "title"]
         filename = f"{user_id}.csv"
         with open(filename, mode='w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=header)
-
-            for todo in todos:
-                todo['username'] = users[0]['username']
-                filtered_todo = {key: todo[key] for key in header}
-                writer.writerow(filtered_todo)
+            file.write(csv_data)
     except IOError:
         print()
