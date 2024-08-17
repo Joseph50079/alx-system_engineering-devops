@@ -27,7 +27,7 @@ def number_of_subscribers(subreddit):
         return 0
 
     try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
+        response = requests.get(url, headers=headers) #allow_redirects=False
 
         # Check if the request was successful
         if response.status_code == 200:
