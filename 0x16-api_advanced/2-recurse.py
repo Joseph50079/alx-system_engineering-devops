@@ -16,7 +16,7 @@ def recurse(subreddit, hot_list=[]):
     global after
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    header = {"User-Agent": "my-recursive-posts"}
+    header = {"User-Agent": "my-recursive-subreddit"}
     params = {"after": after}
 
     response = requests.get(
