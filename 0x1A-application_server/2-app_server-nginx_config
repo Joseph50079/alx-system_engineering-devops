@@ -7,7 +7,7 @@ sudo cat "server {
     listen [::]:80 default_server;
     root   /var/www/html;
     index  index.html index.htm;
-    add_header X-Served-By 142369-web-01;
+    add_header X-Served-By $HOSTNAME;
 
     location / {
     	root /var/www/html;
@@ -18,7 +18,7 @@ sudo cat "server {
 	proxy_set_header X-Served-By $HOSTNAME;
     }
     location /hbnb_static {
-        add_header X-Served-By 142369-web-01;
+        add_header X-Served-By $HOSTNAME;
 	alias /data/web_static/current/;
     }
 }" > /etc/nginx/sites-available/default
