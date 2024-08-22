@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+HOSTNAME=$(hostname)
+
+sudo cat "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /var/www/html;
+    index  index.html index.htm;
+    add_header X-Served-By 142369-web-01;
+
+    location / {
+    	root /var/www/html;
+    }
+    location /airbnb-onepage {
+	proxy_pass http://127.0.0.1:5000;
+	proxy_set_header Host $host;
+	proxy_set_header X-Served-By $HOSTNAME;
+    }
+    location /hbnb_static {
+        add_header X-Served-By 142369-web-01;
+	alias /data/web_static/current/;
+    }
+}" > /etc/nginx/sites-available/default
+
+# Allow Nginx through the firewall
+sudo ufw allow 'Nginx Full'
+
+# Enable the firewall if it is not already enabled
+sudo ufw --force enable
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
+sudo reboot
+
