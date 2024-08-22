@@ -2,7 +2,7 @@
 
 HOSTNAME=$(hostname)
 
-sudo cat "server {
+server {
     listen 80;
     listen [::]:80 default_server;
     root   /var/www/html;
@@ -21,15 +21,5 @@ sudo cat "server {
         add_header X-Served-By $HOSTNAME;
 	alias /data/web_static/current/;
     }
-}" > /etc/nginx/sites-available/default
-
-# Allow Nginx through the firewall
-sudo ufw allow 'Nginx Full'
-
-# Enable the firewall if it is not already enabled
-sudo ufw --force enable
-
-# Restart Nginx to apply the changes
-sudo service nginx restart
-sudo reboot
+}
 
